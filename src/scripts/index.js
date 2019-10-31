@@ -11,83 +11,77 @@ const app = () => {
 
 // setup events
 const initApp = () => {
-    document.getElementById("sort-btn").addEventListener("click", sortAsDes, false); // add button event listener
-    document.getElementById("select-filter").addEventListener("change", sortResults); //add sort select event listener
+    document.getElementById("sort-btn").addEventListener("click", sortAsDes); // add button event listener
+    document.getElementById("search-btn").addEventListener("click", sortResults, false); // search button event
     console.log("hotel app")
+}
+
+//draw hotel results
+const drawRes = (res) => {
+    var results = document.getElementById("content-wrapper")
+    results.innerHTML = '<div class="">' + res.map((res) => { // create DOM for all results
+        return (
+            '<div class="content-results">' + 'Hotel : ' + res.name + '<br></br>' +
+            'City : ' + res.city + ', ' + res.country + '<br></br>' +
+            'Hotel : ' + res.stars + '<br></br>' +
+            '<img src="' + res.images + '"><br></br>' +
+            'stars : ' + res.price + '<br></br>' +
+            'description : ' + res.description + '<br></br>' +
+            '</div>'
+        )
+    }).join('') + '</div>'
 }
 
 // populate results
 // only show minimum of three star hotels
-
 const populateDom = (res) => {
-    var results = document.getElementById("content-wrapper")
-
-
     var data = res.filter((res) => { // filter out hotels rated less then 3 stars
         return res.stars >= 3;
     })
 
-    console.log(data)
-    hotels = data;
-    results.innerHTML = '<div class="">' + data.map((data) => { // create DOM for all results
-        return (
-            '<div class="content-results">' + 'Hotel : ' + data.name + '<br></br>' +
-            'City : ' + data.city + ', ' + data.country + '<br></br>' +
-            'Hotel : ' + data.stars + '<br></br>' +
-            '<img src="' + data.images + '"><br></br>' +
-            'stars : ' + data.price + '<br></br>' +
-            'description : ' + data.description + '<br></br>' +
-            '</div>'
-        )
-    }).join('') + '</div>'
-
+    hotels = data; // global hotel var
+    drawRes(data)
 }
 
-
-const sortResults = (e) => {
-
+// Array.sort()
+// Ascending/descending from button filter
+const sortResults = () => {
     var results = document.getElementById("content-wrapper")
-    console.log("select event", e, e.target, e.target.value);
-    var sort = e.target.value;
+    var list = document.getElementById("sort-btn").textContent
+    var sort = document.getElementById("select-filter").value;
 
-    // Array.sort()
-    // Ascending number
-    // numbers as string
-    // handle number strings properly with  "compare function" (See "Parameter Values" below). https://www.w3schools.com/jsref/jsref_sort.asp
+    var _clean = new Promise(function(resolve, reject) { // clear results promise before populate new
+        setTimeout(() => {
+            results.innerHTML = ''
+            resolve()
+        }, 30);
+    });
 
-    if (sort == "price") {
+    if (results.innerHTML.length > 2) {
+        results.innerHTML = '' // clear
+    }
+
+    if (sort == "price" && (list == "Ascending")) {
         hotels.sort(function(a, b) { return a.price - b.price });
-        results.innerHTML = '';
+        _clean.then(() => drawRes(hotels))
 
-        results.innerHTML = '<div class="">' + hotels.map((hotels) => { // create DOM for all results
-            return (
-                '<div class="content-results">' + 'Hotel : ' + hotels.name + '<br></br>' +
-                'City : ' + hotels.city + ', ' + hotels.country + '<br></br>' +
-                'Hotel : ' + hotels.stars + '<br></br>' +
-                '<img src="' + hotels.images + '"><br></br>' +
-                'stars : ' + hotels.price + '<br></br>' +
-                'description : ' + hotels.description + '<br></br>' +
-                '</div>'
-            )
-        }).join('') + '</div>'
-    } else if (sort == "rating") {
+    } else if (sort == "price" && (list == "Descending")) {
+        hotels.sort(function(a, b) { return a.price - b.price });
+        hotels.reverse()
+        _clean.then(() => drawRes(hotels))
+
+
+    } else if (sort == "rating" && (list == "Ascending")) {
         hotels.sort(function(a, b) { return a.stars - b.stars });
-        results.innerHTML = '';
+        _clean.then(() => drawRes(hotels))
 
-        results.innerHTML = '<div class="">' + hotels.map((hotels) => { // create DOM for all results
-            return (
-                '<div class="content-results">' + 'Hotel : ' + hotels.name + '<br></br>' +
-                'City : ' + hotels.city + ', ' + hotels.country + '<br></br>' +
-                'Hotel : ' + hotels.stars + '<br></br>' +
-                '<img src="' + hotels.images + '"><br></br>' +
-                'stars : ' + hotels.price + '<br></br>' +
-                'description : ' + hotels.description + '<br></br>' +
-                '</div>'
-            )
-        }).join('') + '</div>'
+
+    } else if (sort == "rating" && (list == "Descending")) {
+        hotels.sort(function(a, b) { return a.stars - b.stars });
+        hotels.reverse()
+        _clean.then(() => drawRes(hotels))
     }
 }
-
 
 
 // fetch hotel results
@@ -109,11 +103,10 @@ const popHotels = () => {
 //sort based on selection props 
 //1. stars  2. price
 const sortAsDes = (e) => {
+    // sortResults()
     var btn = document.getElementById("sort-btn");
-    console.log("Ascend Descend", btn)
-        // document.getElementById(btn).innerHTML = "Descending"
 
-    if (btn.textContent == "Ascending") {
+    if (btn.textContent == "Ascending") { // toggel Asc/desc
         btn.innerHTML = "Descending";
     } else {
         btn.innerHTML = "Ascending";
