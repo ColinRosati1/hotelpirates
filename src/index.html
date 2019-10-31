@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./styles/index.css">
     <title>HolidayPirates Frontend test</title>
-  </head>
-  <body>
-    <h1>Welcome on board! ☠️</h1>
-    <p>
-      Show us your best frontend skills! Good luck and we are super excited
-      about the result!
-    </p>
-  </body>
+</head>
+
+<body>
+    <div class="body-wrapper">
+        <div class="body-head">
+            <h1>Hotels</h1>
+        </div>
+        <div class="body-content">
+            <div class="filter">
+                <button id="sort-btn"> click </button>
+                <select>
+                    <option value="price">Price</option>
+                    <option value="rating">rating</option>
+                  </select>
+            </div>
+            <div id="content-wrapper">
+                <div class="content-results">
+                    some results
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <script type="text/javascript" src="./scripts/index.js"></script>
+</body>
+
 </html>
