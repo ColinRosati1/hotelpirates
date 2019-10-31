@@ -47,4 +47,17 @@ body {
   padding: 1em;
   border: 1px solid #1F2421;
 }
+
+#sort-btn {
+  padding: 0.5em;
+  border-radius: 4px;
+  border-color: #1F2421;
+  color: #1F2421;
+  background: #FCFAFA;
+  cursor: pointer;
+}
+
+#sort-btn:hover {
+  color: #8E94F2;
+}
 /*# sourceMappingURL=index.css.map */

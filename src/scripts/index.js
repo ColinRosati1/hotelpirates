@@ -11,7 +11,7 @@ const app = () => {
 
 // setup events
 const initApp = () => {
-    document.getElementById("sort-btn").addEventListener("click", sortFilter, false); // add button event listener
+    document.getElementById("sort-btn").addEventListener("click", sortAsDes, false); // add button event listener
     document.getElementById("select-filter").addEventListener("change", sortResults); //add sort select event listener
     console.log("hotel app")
 }
@@ -22,11 +22,12 @@ const initApp = () => {
 const populateDom = (res) => {
     var results = document.getElementById("content-wrapper")
 
+
     var data = res.filter((res) => { // filter out hotels rated less then 3 stars
         return res.stars >= 3;
     })
 
-
+    console.log(data)
     hotels = data;
     results.innerHTML = '<div class="">' + data.map((data) => { // create DOM for all results
         return (
@@ -107,8 +108,17 @@ const popHotels = () => {
 
 //sort based on selection props 
 //1. stars  2. price
-const sortFilter = () => {
-    console.log("hotel app")
+const sortAsDes = (e) => {
+    var btn = document.getElementById("sort-btn");
+    console.log("Ascend Descend", btn)
+        // document.getElementById(btn).innerHTML = "Descending"
+
+    if (btn.textContent == "Ascending") {
+        btn.innerHTML = "Descending";
+    } else {
+        btn.innerHTML = "Ascending";
+    }
+
 }
 
 window.onload = app();
