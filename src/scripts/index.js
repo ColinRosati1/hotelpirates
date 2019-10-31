@@ -19,13 +19,15 @@ const initApp = () => {
 // populate results
 // only show minimum of three star hotels
 
-const populateDom = (hotels) => {
+const populateDom = (res) => {
     var results = document.getElementById("content-wrapper")
 
-    var data = hotels.filter((hotels) => { // filter out hotels rated less then 3 stars
-        return hotels.stars >= 3;
+    var data = res.filter((res) => { // filter out hotels rated less then 3 stars
+        return res.stars >= 3;
     })
 
+
+    hotels = data;
     results.innerHTML = '<div class="">' + data.map((data) => { // create DOM for all results
         return (
             '<div class="content-results">' + 'Hotel : ' + data.name + '<br></br>' +
@@ -40,9 +42,52 @@ const populateDom = (hotels) => {
 
 }
 
+
 const sortResults = (e) => {
+
+    var results = document.getElementById("content-wrapper")
     console.log("select event", e, e.target, e.target.value);
+    var sort = e.target.value;
+
+    // Array.sort()
+    // Ascending number
+    // numbers as string
+    // handle number strings properly with  "compare function" (See "Parameter Values" below). https://www.w3schools.com/jsref/jsref_sort.asp
+
+    if (sort == "price") {
+        hotels.sort(function(a, b) { return a.price - b.price });
+        results.innerHTML = '';
+
+        results.innerHTML = '<div class="">' + hotels.map((hotels) => { // create DOM for all results
+            return (
+                '<div class="content-results">' + 'Hotel : ' + hotels.name + '<br></br>' +
+                'City : ' + hotels.city + ', ' + hotels.country + '<br></br>' +
+                'Hotel : ' + hotels.stars + '<br></br>' +
+                '<img src="' + hotels.images + '"><br></br>' +
+                'stars : ' + hotels.price + '<br></br>' +
+                'description : ' + hotels.description + '<br></br>' +
+                '</div>'
+            )
+        }).join('') + '</div>'
+    } else if (sort == "rating") {
+        hotels.sort(function(a, b) { return a.stars - b.stars });
+        results.innerHTML = '';
+
+        results.innerHTML = '<div class="">' + hotels.map((hotels) => { // create DOM for all results
+            return (
+                '<div class="content-results">' + 'Hotel : ' + hotels.name + '<br></br>' +
+                'City : ' + hotels.city + ', ' + hotels.country + '<br></br>' +
+                'Hotel : ' + hotels.stars + '<br></br>' +
+                '<img src="' + hotels.images + '"><br></br>' +
+                'stars : ' + hotels.price + '<br></br>' +
+                'description : ' + hotels.description + '<br></br>' +
+                '</div>'
+            )
+        }).join('') + '</div>'
+    }
 }
+
+
 
 // fetch hotel results
 const popHotels = () => {
