@@ -33,19 +33,58 @@ body {
     font-size: 2em;
 }
 
-.filter {
+#filter {
     padding: 1em;
+    display: flex;
+    justify-content: center;
+    background: #0A2342;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 55.5vw;
+}
+
+.sticky+.content-results {
+    padding-top: 102px;
 }
 
 .content-results {
     padding: 1em;
     border: 1px solid $content-color;
+    font-size: 0.7em;
+    h2 {
+        margin-block-start: 0.03em;
+        margin-block-end: 0.10em;
+    }
+}
+
+#res-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    ;
+}
+
+#htl-img {
+    width: 100%;
+}
+
+#res-title {
+    display: inline-block;
+}
+
+#star {
+    display: inline-block;
 }
 
 button {
+    margin-left: 1em;
     padding: 0.5em;
     border-radius: 4px;
-    border-color: $content-color;
+    border: 1px solid $content-color;
     color: $content-color;
     background: $content-bg-color;
     cursor: pointer;
@@ -53,6 +92,10 @@ button {
         color: $body-bg-color;
     }
     &:active {}
+}
+
+#search-btn {
+    background: #94C5CC;
 }
 
 #select-filter {

@@ -13,7 +13,23 @@ const app = () => {
 const initApp = () => {
     document.getElementById("sort-btn").addEventListener("click", sortAsDes); // add button event listener
     document.getElementById("search-btn").addEventListener("click", sortResults, false); // search button event
-    console.log("hotel app")
+
+    window.onscroll = function() { stickyHead() };
+
+    // Get the header
+    var header = document.getElementById("filter");
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function stickyHead() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
 }
 
 //draw hotel results
@@ -21,11 +37,13 @@ const drawRes = (res) => {
     var results = document.getElementById("content-wrapper")
     results.innerHTML = '<div class="">' + res.map((res) => { // create DOM for all results
         return (
-            '<div class="content-results">' + 'Hotel : ' + res.name + '<br></br>' +
-            'City : ' + res.city + ', ' + res.country + '<br></br>' +
-            'Hotel : ' + res.stars + '<br></br>' +
-            '<img src="' + res.images + '"><br></br>' +
-            'stars : ' + res.price + '<br></br>' +
+            '<div class="content-results"><div id="res-header"><h2 id="res-title">' + res.name + '</h2>' +
+            '<div id="star"><h6>⭐ ' + res.stars + '</6></div></div><br></br>' +
+            res.city + ', ' + res.country + '<br></br>' +
+            // '<div id="star">⭐ ' + res.stars + '</div>' +
+            '<img id="htl-img" src="' + res.images + '"><br></br>' +
+            '$' + res.price + ' /Night' +
+            '<br></br>' +
             'description : ' + res.description + '<br></br>' +
             '</div>'
         )
@@ -61,7 +79,7 @@ const sortResults = () => {
         results.innerHTML = '' // clear
     }
 
-    if (sort == "price" && (list == "Ascending")) {
+    if (sort == "price" && (list == "Ascending")) { // logic mach sorting
         hotels.sort(function(a, b) { return a.price - b.price });
         _clean.then(() => drawRes(hotels))
 
