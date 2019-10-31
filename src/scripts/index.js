@@ -11,8 +11,8 @@ const app = () => {
 
 // setup events
 const initApp = () => {
-    document.getElementById("sort-btn").addEventListener("click", sortFilter, false);
-
+    document.getElementById("sort-btn").addEventListener("click", sortFilter, false); // add button event listener
+    document.getElementById("select-filter").addEventListener("change", sortResults); //add sort select event listener
     console.log("hotel app")
 }
 
@@ -40,6 +40,10 @@ const populateDom = (hotels) => {
 
 }
 
+const sortResults = (e) => {
+    console.log("select event", e, e.target, e.target.value);
+}
+
 // fetch hotel results
 const popHotels = () => {
     const url = " http://fake-hotel-api.herokuapp.com/api/hotels";
@@ -47,15 +51,12 @@ const popHotels = () => {
     // no custom header requests
     const options = {}
 
-    fetch(url, options)
-        .then(res => res.json())
+    fetch(url, options) // fetch API data
+        .then(res => res.json()) // json cohersion
         .then(data => {
-            hotels = data;
-            console.log(hotels)
+            hotels = data; // assign data to global hotel var
             return data;
-        }).then(data => populateDom(data))
-
-
+        }).then(data => populateDom(data)) // pass data into populate function
 }
 
 
