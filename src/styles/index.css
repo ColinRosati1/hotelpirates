@@ -1,7 +1,6 @@
 body {
-  background-color: #8E94F2;
   color: white;
-  font-family: sans-serif;
+  font-family: 'Work Sans', sans-serif;
 }
 
 .body-wrapper {
@@ -26,9 +25,12 @@ body {
 
 .body-head {
   height: 25%;
-  width: 100%;
+  width: 90vw;
   font-size: 4em;
   padding: 0.5em 1em 0.5em 1em;
+  text-align: center;
+  font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+  background-color: #94C5CC;
 }
 
 .body-content {
@@ -47,13 +49,15 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background: #0A2342;
+  background: #FCFAFA;
+  border: 1px solid black;
 }
 
 .sticky {
   position: fixed;
   top: 0;
-  width: 55.5vw;
+  right: 0px;
+  width: 100vw;
 }
 
 .sticky + .content-results {
