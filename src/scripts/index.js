@@ -41,7 +41,10 @@ const initApp = () => {
 //draw hotel results
 const drawRes = (res) => {
     var results = document.getElementById("content-wrapper")
+
     results.innerHTML = '<div class="results">' + res.map((res) => { // create DOM for all results
+        var review = reviews(res.id)
+
         return (
             '<div class="content-results"><div id="res-header"><h2 id="res-title">' + res.name + '</h2>' +
             '<div id="star"><h6>⭐ ' + res.stars + '</6></div></div><br></br>' +
@@ -69,6 +72,7 @@ const populateDom = async(res) => {
     })
 
     hotels = data; // global hotel var
+    console.log(data)
     drawRes(data)
 }
 
@@ -127,6 +131,7 @@ const popHotels = async() => {
         const data = await response.json()
         hotels = data;
         const drawRes = await populateDom(data);
+        // const reviews = await reviews(data.id)
         return data;
     } catch (err) {
         console.log(err.response); // if api error try call it again
@@ -195,7 +200,7 @@ const findFlight = async(city) => {
 
 
     //Find flights need API call to return flights from your departure, destination and dates in JSON
-    //flights{
+    //flights = {
     // departure: "city",
     // destination: "cityStr",
     // departureDate: "xx.xx.xx",
@@ -204,5 +209,26 @@ const findFlight = async(city) => {
 
 
 }
+
+
+const popReviews = async() => {
+
+}
+
+//returns reviews
+// construct api call
+const reviews = async(id) => {
+    console.log("reviews", id)
+    const url = "http://fake-hotel-api.herokuapp.com/api/reviews?hotel_id=" + id;
+    const options = {}
+    try {
+        const response = await fetch(url, options)
+        const data = await response.json()
+        return data;
+    } catch (err) {
+        console.log(err.response); // if api error try call it again
+    }
+}
+
 
 window.onload = app();
