@@ -35,7 +35,7 @@ const initApp = () => {
 //draw hotel results
 const drawRes = (res) => {
     var results = document.getElementById("content-wrapper")
-    results.innerHTML = '<div class="">' + res.map((res) => { // create DOM for all results
+    results.innerHTML = '<div class="results">' + res.map((res) => { // create DOM for all results
         return (
             '<div class="content-results"><div id="res-header"><h2 id="res-title">' + res.name + '</h2>' +
             '<div id="star"><h6>⭐ ' + res.stars + '</6></div></div><br></br>' +
