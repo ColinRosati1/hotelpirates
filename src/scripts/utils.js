@@ -4,13 +4,13 @@
 
 var hotels = '';
 
-const app = () => {
+exports.app = () => {
     initApp()
     popHotels()
 }
 
 // setup events
-const initApp = () => {
+exports.initApp = () => {
     document.getElementById("sort-btn").addEventListener("click", sortAsDes); // add button event listener
     document.getElementById("search-btn").addEventListener("click", sortResults, false); // search button event
 
@@ -33,7 +33,7 @@ const initApp = () => {
 }
 
 //draw hotel results
-const drawRes = (res) => {
+exports.drawRes = (res) => {
     var results = document.getElementById("content-wrapper")
     results.innerHTML = '<div class="">' + res.map((res) => { // create DOM for all results
         return (
@@ -52,7 +52,7 @@ const drawRes = (res) => {
 
 // populate results
 // only show minimum of three star hotels
-const populateDom = (res) => {
+exports.populateDom = (res) => {
     var data = res.filter((res) => { // filter out hotels rated less then 3 stars
         return res.stars >= 3;
     })
@@ -63,8 +63,7 @@ const populateDom = (res) => {
 
 // Array.sort()
 // Ascending/descending from button filter
-// TODO add then catches
-const sortResults = () => {
+exports.sortResults = () => {
     var results = document.getElementById("content-wrapper")
     var list = document.getElementById("sort-btn").textContent
     var sort = document.getElementById("select-filter").value;
@@ -104,8 +103,7 @@ const sortResults = () => {
 
 
 // fetch hotel results
-// TODO add then catches
-const popHotels = () => {
+exports.popHotels = () => {
     const url = " http://fake-hotel-api.herokuapp.com/api/hotels";
 
     // no custom header requests
@@ -122,7 +120,7 @@ const popHotels = () => {
 
 //sort based on selection props 
 //1. stars  2. price
-const sortAsDes = (e) => {
+exports.sortAsDes = (e) => {
     // sortResults()
     var btn = document.getElementById("sort-btn");
 
@@ -136,9 +134,3 @@ const sortAsDes = (e) => {
     return btn.innerHTML
 
 }
-
-const test = () => {
-    return 0
-}
-
-window.onload = app();

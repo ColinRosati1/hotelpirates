@@ -53,6 +53,7 @@ body {
           justify-content: center;
   background: #fcfcf8;
   top: 0px;
+  border-bottom: 3px solid black;
 }
 
 .sticky {
