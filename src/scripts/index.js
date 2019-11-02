@@ -53,10 +53,12 @@ const drawRes = (res) => {
             '$' + res.price + ' /Night' +
             '<br></br>' +
             'description : ' + res.description + '<br></br>' +
+            '<div id="reviewSection"></div>' +
             '<button id="select-hotel">Select</button>' +
             '<button id="find-flight" onClick="findFlight(\'' + res.city + '\')">Find Flight</button>' +
             '</div>'
         )
+        popRev(res)
     }).join('') + '</div>'
 
     // document.getElementById("find-flight").addEventListener("click", findFlight, false); // search button event
@@ -210,20 +212,30 @@ const findFlight = async(city) => {
 
 }
 
-
-const popReviews = async() => {
-
+// populate reviews into DOM
+// TODO populate unique reviews. now rewriting one div
+const popRev = async(res) => {
+    const revSection = document.getElementById("reviewSection")
+    revSection.innerHTML = '<div class="results">' + res.map((res) => { // create DOM for all results
+        console.log(res.name)
+        return (
+            '<div class="review-results">' +
+            res.name + ', ' + res.comment + '<br></br>' +
+            '</div>'
+        )
+    }).join('') + '</div>'
 }
 
 //returns reviews
 // construct api call
 const reviews = async(id) => {
-    console.log("reviews", id)
     const url = "http://fake-hotel-api.herokuapp.com/api/reviews?hotel_id=" + id;
     const options = {}
     try {
         const response = await fetch(url, options)
         const data = await response.json()
+            // console.log(data)
+        const populate = await popRev(data)
         return data;
     } catch (err) {
         console.log(err.response); // if api error try call it again
