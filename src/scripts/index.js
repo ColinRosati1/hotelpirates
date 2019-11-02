@@ -40,14 +40,18 @@ const drawRes = (res) => {
             '<div class="content-results"><div id="res-header"><h2 id="res-title">' + res.name + '</h2>' +
             '<div id="star"><h6>⭐ ' + res.stars + '</6></div></div><br></br>' +
             res.city + ', ' + res.country + '<br></br>' +
-            // '<div id="star">⭐ ' + res.stars + '</div>' +
             '<img id="htl-img" src="' + res.images + '"><br></br>' +
             '$' + res.price + ' /Night' +
             '<br></br>' +
             'description : ' + res.description + '<br></br>' +
+            '<button id="select-hotel">Select</button>' +
+            '<button id="find-flight" onclick="findFlight(' + res.city + ')">Find Flight</button>' +
             '</div>'
         )
     }).join('') + '</div>'
+
+    // document.getElementById("find-flight").addEventListener("click", findFlight, false); // search button event
+
 }
 
 // populate results
@@ -74,11 +78,11 @@ const sortResults = () => {
         setTimeout(() => {
             results.innerHTML = ''
             resolve()
-        }, 30);
+        }, 10);
     });
 
     if (results.innerHTML.length > 2) {
-        results.innerHTML = '' // clear
+        results.innerHTML = '' // clear dom
     }
 
     if (sort == "price" && (list == "Ascending")) { // logic mach sorting
@@ -100,6 +104,8 @@ const sortResults = () => {
         hotels.sort(function(a, b) { return a.stars - b.stars });
         hotels.reverse()
         _clean.then(() => drawRes(hotels))
+    } else {
+        document.getElementById("content-wrapper").innerHTML = "filter result error"
     }
 }
 
@@ -120,30 +126,24 @@ const popHotels = async() => {
         console.log(err.response); // if api error try call it again
         popHotels()
     }
-
-
 }
-
 
 //sort based on selection props 
 //1. stars  2. price
 const sortAsDes = (e) => {
-    // sortResults()
     var btn = document.getElementById("sort-btn");
 
-
-    if (btn.innerHTML == "Ascending") { // toggel Asc/desc
+    if (btn.innerHTML == "Ascending") { // toggel Asc/desc string on button
         btn.innerHTML = "Descending";
     } else {
         btn.innerHTML = "Ascending";
     }
 
     return btn.innerHTML
-
 }
 
-const test = () => {
-    return 0
+const findFlight = (city) => {
+    console.log('find flight', city)
 }
 
 window.onload = app();

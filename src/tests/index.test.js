@@ -1,9 +1,7 @@
 // test
 // load API !
-// API data to JSON 
 // Populate hotel restults DOM !
 // Sort button Ascend or Descend !
-// search
 // select events
 
 const fetchMock = require('fetch-mock');
@@ -17,6 +15,13 @@ test("should expect API to return data", () => {
     const res = fetchMock.mock('http://fake-hotel-api.herokuapp.com/api/hotels', 200);
     expect(res).toBeTruthy()
 })
+
+
+test("should expect buttons and select event", () => {
+    const res = fetchMock.mock('http://fake-hotel-api.herokuapp.com/api/hotels', 200);
+    expect(res).toBeTruthy()
+})
+
 
 //TODO
 // Jest & puppeteer
@@ -34,21 +39,6 @@ test("should expect sort button Ascending or Descending textContent", async() =>
 
     expect(sortBtnText).toBe("Ascending" || "Desceingin")
 })
-
-//TODO complete
-// test("should expect search Draw results", async() => {
-//     browser = await puppeteer.launch({
-//         headless: true
-//     });
-
-//     const page = await browser.newPage();
-//     await page.goto(appPath);
-//     await page.click('button#search-btn')
-
-//     const res = await page.$eval('#content-wrapper', el => el.childNodes)
-
-//     expect(res).toBe()
-// })
 
 
 test("should expect API to populate results div", async() => {

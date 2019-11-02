@@ -43,7 +43,7 @@ body {
     display: flex;
     justify-content: center;
     background: $content-bg-color;
-    top: 0px;
+    top: -10px;
     border-bottom: 3px solid black;
 }
 
@@ -53,6 +53,7 @@ body {
     right: 0px;
     width: 95vw;
     transform: translate3d(0, 0, 0);
+    margin-bottom: 10%;
 }
 
 .content-results {
@@ -205,6 +206,6 @@ option:hover {
         width: 80vw;
     }
     .sticky {
-        width: 100vw;
+        width: 95vw;
     }
 }
