@@ -135,6 +135,30 @@ option:hover {
     background: rgb(140, 192, 162);
 }
 
+#flight-modal {
+    display: none;
+    width: 50%;
+    height: 50%;
+    top: 30%;
+    background: $body-bg-color;
+    border: 3px solid black;
+    position: fixed;
+    font-size: 1.5em;
+    justify-content: space-between;
+    // flex-direction: column;
+    // align-items: center;
+    padding: 1.5em;
+    color: black;
+}
+
+#flex-wrap {
+    width: 70%;
+    // justify-content: center;
+    // flex-direction: column;
+    // align-items: center;
+    padding: 1em;
+}
+
 
 /* Extra small devices (phones, 600px and down) */
 
@@ -183,29 +207,28 @@ option:hover {
 
 /* Large devices (laptops/desktops, 992px and up) */
 
-@media only screen and (min-width: 992px) {
-    .body-head {
-        font-size: 2em;
-    }
-    .body-wrapper {
-        width: 80vw;
-    }
-    .sticky {
-        width: 100vw;
-    }
-}
-
+// @media only screen and (min-width: 992px) {
+//     .body-head {
+//         font-size: 2em;
+//     }
+//     .body-wrapper {
+//         width: 80vw;
+//     }
+//     .sticky {
+//         width: 100vw;
+//     }
+// }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 
-@media only screen and (min-width: 1200px) {
-    .body-head {
-        font-size: 2em;
-    }
-    .body-wrapper {
-        width: 80vw;
-    }
-    .sticky {
-        width: 95vw;
-    }
-}
+// @media only screen and (min-width: 1200px) {
+//     .body-head {
+//         font-size: 2em;
+//     }
+//     .body-wrapper {
+//         width: 80vw;
+//     }
+//     .sticky {
+//         width: 95vw;
+//     }
+// }

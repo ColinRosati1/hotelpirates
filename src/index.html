@@ -16,6 +16,22 @@
             <h1>Pirate Hotels</h1>
             <p>Find your hotel</p>
         </div>
+
+        <!-- The Modal -->
+        <div id="flight-modal">
+            <span onclick="document.getElementById('flight-modal').style.display='none'">&times;</span>
+
+            <div id="flex-wrap">
+                <p id="flight-modal-p"> Select Flight Details to </p>
+                departure City <input id="depM"></input><br></br>
+                departure date <input id="depDateM"> </input><br></br>
+                return date <input id="retDateM"></input><br></br>
+                <button onclick="handleFlightDetails()">Search</button>
+            </div>
+
+
+        </div>
+
         <div class="body-content">
             <div id="filter">
 

@@ -3,6 +3,12 @@
 //sort results
 
 var hotels = '';
+var flights = {
+    departure: "city",
+    destination: "cityStr",
+    departureDate: "xx.xx.xx",
+    returnDate: "xx.xx.xx"
+}
 
 const app = () => {
     initApp()
@@ -45,7 +51,7 @@ const drawRes = (res) => {
             '<br></br>' +
             'description : ' + res.description + '<br></br>' +
             '<button id="select-hotel">Select</button>' +
-            '<button id="find-flight" onclick="findFlight(' + res.city + ')">Find Flight</button>' +
+            '<button id="find-flight" onClick="findFlight(\'' + res.city + '\')">Find Flight</button>' +
             '</div>'
         )
     }).join('') + '</div>'
@@ -142,8 +148,61 @@ const sortAsDes = (e) => {
     return btn.innerHTML
 }
 
-const findFlight = (city) => {
+// open modal
+// return flight detials object
+const selectDetails = async(city) => {
+    const details = {
+        departure: "city",
+        destination: "cityStr",
+        departureDate: "xx.xx.xx",
+        returnDate: "xx.xx.xx"
+    }
+
+    document.getElementById('flight-modal').style.display = 'flex' // trigger modal
+    document.getElementById('flight-modal-p').innerHTML = "Select Flight Details to " + city;
+
+    return await details
+}
+
+//click modal handle flight details
+const handleFlightDetails = () => {
+    console.log("handle flight details event")
+    var dep = document.getElementById("depM").value;
+    var depDate = document.getElementById("depDateM").value;
+    var retDate = document.getElementById("retDateM").value;
+
+    flights = {
+        departure: dep,
+        destination: "cityStr",
+        departureDate: depDate,
+        returnDate: retDate
+    }
+
+    document.getElementById('flight-modal').style.display = 'none';
+
+    return flights
+}
+
+const findFlight = async(city) => {
     console.log('find flight', city)
+    const cityStr = city.replace(/\s+/g, '-') // clean up spaces from string
+    let flightDetails = await selectDetails(city)
+
+    flightDetails.destination = cityStr
+    flightApi = flightDetails.departure + '/' + flightDetails.destination + '/' + flightDetails.departureDate + '/' + flightDetails.returnDate
+    const url = " http://fake-hotel-api.herokuapp.com/api/flights/" + flightApi;
+    console.log('url', url)
+
+
+    //Find flights need API call to return flights from your departure, destination and dates in JSON
+    //flights{
+    // departure: "city",
+    // destination: "cityStr",
+    // departureDate: "xx.xx.xx",
+    // returnDate: "xx.xx.xx"
+    // }
+
+
 }
 
 window.onload = app();
