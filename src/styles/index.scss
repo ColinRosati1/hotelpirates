@@ -2,7 +2,6 @@ $body-bg-color: rgb(169, 230, 194);
 $content-color: #1F2421;
 $content-bg-color: rgb(252, 252, 248);
 body {
-    // background-color: $body-bg-color;
     color: white;
     font-family: "IBM Plex Sans", sans-serif;
     margin: 0px 8px 8px 8px;
@@ -93,8 +92,6 @@ body {
 button {
     margin-left: 1em;
     padding: 0.5em;
-    // border-radius: 4px;
-    // border: 1px solid $content-color;
     border-width: 2px;
     border-style: solid;
     border-image: initial;
@@ -138,24 +135,18 @@ option:hover {
 #flight-modal {
     display: none;
     width: 50%;
-    height: 50%;
     top: 30%;
     background: $body-bg-color;
     border: 3px solid black;
     position: fixed;
     font-size: 1.5em;
     justify-content: space-between;
-    // flex-direction: column;
-    // align-items: center;
     padding: 1.5em;
     color: black;
 }
 
 #flex-wrap {
     width: 70%;
-    // justify-content: center;
-    // flex-direction: column;
-    // align-items: center;
     padding: 1em;
 }
 
@@ -203,32 +194,3 @@ option:hover {
         width: 100vw;
     }
 }
-
-
-/* Large devices (laptops/desktops, 992px and up) */
-
-// @media only screen and (min-width: 992px) {
-//     .body-head {
-//         font-size: 2em;
-//     }
-//     .body-wrapper {
-//         width: 80vw;
-//     }
-//     .sticky {
-//         width: 100vw;
-//     }
-// }
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-
-// @media only screen and (min-width: 1200px) {
-//     .body-head {
-//         font-size: 2em;
-//     }
-//     .body-wrapper {
-//         width: 80vw;
-//     }
-//     .sticky {
-//         width: 95vw;
-//     }
-// }

@@ -161,7 +161,6 @@ option:hover {
 #flight-modal {
   display: none;
   width: 50%;
-  height: 50%;
   top: 30%;
   background: #a9e6c2;
   border: 3px solid black;
@@ -217,7 +216,4 @@ option:hover {
     width: 100vw;
   }
 }
-
-/* Large devices (laptops/desktops, 992px and up) */
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 /*# sourceMappingURL=index.css.map */

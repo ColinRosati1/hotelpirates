@@ -16,31 +16,6 @@ test("should expect API to return data", () => {
     expect(res).toBeTruthy()
 })
 
-
-test("should expect buttons and select event", () => {
-    const res = fetchMock.mock('http://fake-hotel-api.herokuapp.com/api/hotels', 200);
-    expect(res).toBeTruthy()
-})
-
-
-//TODO
-// Jest & puppeteer
-// DOM tests
-test("should expect sort button Ascending or Descending textContent", async() => {
-    browser = await puppeteer.launch({
-        headless: true
-    });
-
-    const page = await browser.newPage();
-    await page.goto(appPath);
-    await page.click('button#sort-btn')
-
-    const sortBtnText = await page.$eval('#sort-btn', el => el.textContent)
-
-    expect(sortBtnText).toBe("Ascending" || "Desceingin")
-})
-
-
 test("should expect API to populate results div", async() => {
     browser = await puppeteer.launch({
         headless: true
