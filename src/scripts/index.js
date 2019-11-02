@@ -52,8 +52,9 @@ const drawRes = (res) => {
 
 // populate results
 // only show minimum of three star hotels
-const populateDom = (res) => {
-    var data = res.filter((res) => { // filter out hotels rated less then 3 stars
+const populateDom = async(res) => {
+    if (!res) {}
+    var data = await res.filter((res) => { // filter out hotels rated less then 3 stars
         return res.stars >= 3;
     })
 
@@ -63,10 +64,10 @@ const populateDom = (res) => {
 
 // Array.sort()
 // Ascending/descending from button filter
-// TODO add then catches
+// TODO add promise catches
 const sortResults = () => {
     var results = document.getElementById("content-wrapper")
-    var list = document.getElementById("sort-btn").textContent
+    var list = document.getElementById("sort-btn").textContent;
     var sort = document.getElementById("select-filter").value;
 
     var _clean = new Promise(function(resolve, reject) { // clear results promise before populate new
@@ -104,19 +105,23 @@ const sortResults = () => {
 
 
 // fetch hotel results
-// TODO add then catches
-const popHotels = () => {
+const popHotels = async() => {
     const url = " http://fake-hotel-api.herokuapp.com/api/hotels";
 
     // no custom header requests
     const options = {}
+    try {
+        const response = await fetch(url, options)
+        const data = await response.json()
+        hotels = data;
+        const drawRes = await populateDom(data);
+        return data;
+    } catch (err) {
+        console.log(err.response); // if api error try call it again
+        popHotels()
+    }
 
-    fetch(url, options) // fetch API data
-        .then(res => res.json()) // json cohersion
-        .then(data => {
-            hotels = data; // assign data to global hotel var
-            return data;
-        }).then(data => populateDom(data)) // pass data into populate function
+
 }
 
 

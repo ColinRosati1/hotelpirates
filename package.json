@@ -45,6 +45,8 @@
     "dependencies": {
         "@babel/polyfill": "^7.6.0",
         "core-js": "^3.3.3",
-        "jest": "^24.9.0"
+        "fetch-mock": "^8.0.0-alpha.14",
+        "jest": "^24.9.0",
+        "node-fetch": "^2.6.0"
     }
 }
