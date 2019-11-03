@@ -38,20 +38,25 @@ const initApp = () => {
     }
 }
 
+// TODO toggle comment display
+const toggleCommentDisplay = (e) => {
+    // var elId = "rev" + id;
+    // var el = e.parentNode.childNodes
+
+    // console.log(e.parentNode.childNodes.length)
+
+    // for (var i = 3; i > el.length; i++) {
+    //     el[i].classList.toggle("hideRev");
+    // }
+
+    // el.classList.toggle("hideRev");
+}
+
 //draw hotel results
 const drawRes = async(res) => {
     var results = document.getElementById("content-wrapper")
-    const revSection = document.getElementById("reviewSection")
-
-    // console.log("revSection", revSection)
 
     results.innerHTML = '<div class="results">' + res.map((res) => { // create DOM for all results
-        let revRes = ''
-            // var rev = reviews(res.id).then(value => {
-            //      value
-            // })
-
-
         return (
             '<div class="content-results"><div id="res-header"><h2 id="res-title">' + res.name + '</h2>' +
             '<div id="star"><h6>⭐ ' + res.stars + '</6></div></div><br></br>' +
@@ -59,20 +64,14 @@ const drawRes = async(res) => {
             '<img id="htl-img" src="' + res.images + '"><br></br>' +
             '$' + res.price + ' /Night' +
             '<br></br>' +
-            'description : ' + res.description + '<br></br>' +
-            '<div class="reviews" id="' + res.id + '">' + reviews(res.id).then(val => {
-                console.log(document.getElementById(res.id))
-                val.map((val) => { // create DOM for all results
-                    console.log(val)
-                        // return (val.name + val.comment)
-                        // val.name + val.comment
-                    let data = "<div> <h4>Comments</h4> <br></br>" + val.name + "<br></br>" + val.comment + "</div>"
-
-                    document.getElementById(res.id).innerHTML = data;
+            'description : ' + res.description +
+            '<div class="reviews" id="' + res.id + '" >' + reviews(res.id).then(val => {
+                document.getElementById(res.id).innerHTML = '<button onclick="toggleCommentDisplay(this)">Comments</button><br></br>';
+                val.map((val) => {
+                    return document.getElementById(res.id).innerHTML += "<div id='rev rev-res" + res.id + "'><p>" + val.name + "</p><p>" + val.comment + "</p></div>";
                 })
-            }).catch(() => {
-                document.getElementById(res.id).innerHTML = " ";
-            }) + '</div>' +
+            }) +
+            '</div>' +
             '<button id="select-hotel">Select</button>' +
             '<button id="find-flight" onClick="findFlight(\'' + res.city + '\')">Find Flight</button>' +
             '</div>'
@@ -175,29 +174,6 @@ const sortAsDes = (e) => {
     return btn.innerHTML
 }
 
-
-// populate reviews into DOM
-// TODO populate unique reviews. now rewriting one div
-const popRev = async(res) => {
-    var promise = new Promise((resolve, reject) => {
-        // resolve('<div class="results">' + res.map((res) => { // create DOM for all results
-        //     // console.log(res.name)
-        //     return (
-        //         '<div class="review-results">' +
-        //         res.name + ', ' + res.comment + '<br></br>' +
-        //         '</div>'
-        //     )
-        // }).join('') + '</div>')
-        resolve(res.map((res) => { // create DOM for all results
-            // console.log(res.name)
-            return (res.name + res.comment)
-        }))
-        reject("no reviews yet")
-
-    });
-    return await promise;
-}
-
 //returns reviews
 // construct api call
 const reviews = async(id) => {
@@ -206,9 +182,6 @@ const reviews = async(id) => {
     try {
         const response = await fetch(url, options)
         const data = await response.json()
-            // const populate = await popRev(data)
-            // console.log("pop", populate)
-            // resolve(populate)
         return data;
     } catch (err) {
         console.log(err.response); // if api error try call it again
