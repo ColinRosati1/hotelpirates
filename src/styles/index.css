@@ -111,6 +111,10 @@ body {
   display: inline-block;
 }
 
+.reviews {
+  padding: 1.5em;
+}
+
 button {
   margin-left: 1em;
   padding: 0.5em;

@@ -39,11 +39,18 @@ const initApp = () => {
 }
 
 //draw hotel results
-const drawRes = (res) => {
+const drawRes = async(res) => {
     var results = document.getElementById("content-wrapper")
+    const revSection = document.getElementById("reviewSection")
+
+    // console.log("revSection", revSection)
 
     results.innerHTML = '<div class="results">' + res.map((res) => { // create DOM for all results
-        var review = reviews(res.id)
+        let revRes = ''
+            // var rev = reviews(res.id).then(value => {
+            //      value
+            // })
+
 
         return (
             '<div class="content-results"><div id="res-header"><h2 id="res-title">' + res.name + '</h2>' +
@@ -53,13 +60,27 @@ const drawRes = (res) => {
             '$' + res.price + ' /Night' +
             '<br></br>' +
             'description : ' + res.description + '<br></br>' +
-            '<div id="reviewSection"></div>' +
+            '<div class="reviews" id="' + res.id + '">' + reviews(res.id).then(val => {
+                console.log(document.getElementById(res.id))
+                val.map((val) => { // create DOM for all results
+                    console.log(val)
+                        // return (val.name + val.comment)
+                        // val.name + val.comment
+                    let data = "<div> <h4>Comments</h4> <br></br>" + val.name + "<br></br>" + val.comment + "</div>"
+
+                    document.getElementById(res.id).innerHTML = data;
+                })
+            }).catch(() => {
+                document.getElementById(res.id).innerHTML = " ";
+            }) + '</div>' +
             '<button id="select-hotel">Select</button>' +
             '<button id="find-flight" onClick="findFlight(\'' + res.city + '\')">Find Flight</button>' +
             '</div>'
         )
-        popRev(res)
     }).join('') + '</div>'
+
+
+    // console.log("revSection", revSection)
 
     // document.getElementById("find-flight").addEventListener("click", findFlight, false); // search button event
 
@@ -74,7 +95,6 @@ const populateDom = async(res) => {
     })
 
     hotels = data; // global hotel var
-    console.log(data)
     drawRes(data)
 }
 
@@ -155,6 +175,48 @@ const sortAsDes = (e) => {
     return btn.innerHTML
 }
 
+
+// populate reviews into DOM
+// TODO populate unique reviews. now rewriting one div
+const popRev = async(res) => {
+    var promise = new Promise((resolve, reject) => {
+        // resolve('<div class="results">' + res.map((res) => { // create DOM for all results
+        //     // console.log(res.name)
+        //     return (
+        //         '<div class="review-results">' +
+        //         res.name + ', ' + res.comment + '<br></br>' +
+        //         '</div>'
+        //     )
+        // }).join('') + '</div>')
+        resolve(res.map((res) => { // create DOM for all results
+            // console.log(res.name)
+            return (res.name + res.comment)
+        }))
+        reject("no reviews yet")
+
+    });
+    return await promise;
+}
+
+//returns reviews
+// construct api call
+const reviews = async(id) => {
+    const url = "http://fake-hotel-api.herokuapp.com/api/reviews?hotel_id=" + id;
+    const options = {}
+    try {
+        const response = await fetch(url, options)
+        const data = await response.json()
+            // const populate = await popRev(data)
+            // console.log("pop", populate)
+            // resolve(populate)
+        return data;
+    } catch (err) {
+        console.log(err.response); // if api error try call it again
+    }
+}
+
+
+
 // open modal
 // return flight detials object
 const selectDetails = async(city) => {
@@ -212,35 +274,6 @@ const findFlight = async(city) => {
 
 }
 
-// populate reviews into DOM
-// TODO populate unique reviews. now rewriting one div
-const popRev = async(res) => {
-    const revSection = document.getElementById("reviewSection")
-    revSection.innerHTML = '<div class="results">' + res.map((res) => { // create DOM for all results
-        console.log(res.name)
-        return (
-            '<div class="review-results">' +
-            res.name + ', ' + res.comment + '<br></br>' +
-            '</div>'
-        )
-    }).join('') + '</div>'
-}
-
-//returns reviews
-// construct api call
-const reviews = async(id) => {
-    const url = "http://fake-hotel-api.herokuapp.com/api/reviews?hotel_id=" + id;
-    const options = {}
-    try {
-        const response = await fetch(url, options)
-        const data = await response.json()
-            // console.log(data)
-        const populate = await popRev(data)
-        return data;
-    } catch (err) {
-        console.log(err.response); // if api error try call it again
-    }
-}
 
 
 window.onload = app();
