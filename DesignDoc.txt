@@ -38,22 +38,12 @@ Context
     Vanilla js
     Read API call JSON
     Display & Sort data 
-    styled data
-
 
 Proposed Solution
 
-    HTML 
-        header
-        body
-            selection sort
-            results
-
-    Display data    
-        -default 3 starts Sort
-
-    filter 
-        -sort price
+API call
+Async call to API. coherse data into JSON. Catch no data and call API again. return the API results 
+and populate the DOM. 
 
 Flight API Solution
 For the flight finder backend API I have written a small function to send a get request call 
@@ -73,20 +63,35 @@ The backend would scrap for results returning many results. These results could 
 handled  in the fronted by price, length, layover sorting.
         
 
-Challenge
-    sort data
-    Map?
-        ascending - descending
-        map() - make new array
-        filter() - callback function conditional returns new array
-        sort() - comparison 
-         find() - True / false
- 
+Challenges
+    sort data API data. I mapped all of the API results to populate the DOM inside the callback as Im
+    handling the API async. I am not satisfied with how messy my drawRes() became. There are two promise
+    callbacks. I honeslty wish I was writing this in React. Since I am using JS to handle the DOM
+    React is much faster, safer to handle bugs etc.
 
+    I am not satisfied with hotels review callback. This became messy passing the hotel id to an ascync
+    function and writing DOM elements in a nested callback! 
+
+    I found writing tests simulating the DOM with JEST & puppeteer to be difficult to test for. Often
+    I was testing if the DOM element existed rather then the data inside of it. I would restructure my
+    functions to seperate DOM handling and data handling to do more unit testing before integrating them.
+
+TODOS
+- write Modular CSS and JS components. Import these for clarity of code.
+- Clean up Async API promises so there is not nested callbacks populating DOM.
+    This is too messy solution. Im not satisfied.
+- Toggle review comments hide/display
+- write catches for the filter sorting data
+- handle flight details into a purchase portal
+- handle flight details API response
+- find flight modal only works in dev. 
+- build importing style and JS resources errors
 
 Steps to Run
 
-1.open index.html page
+1.open ./build/index.html 
+
+***** for find flight modal you must run the dev code. ./src/index.html
 
 
 

@@ -2,6 +2,8 @@
 //populate app
 //sort results
 
+import '../styles/index.css';
+
 var hotels = '';
 var flights = {
     departure: "city",
@@ -19,7 +21,6 @@ const app = () => {
 const initApp = () => {
     document.getElementById("sort-btn").addEventListener("click", sortAsDes); // add button event listener
     document.getElementById("search-btn").addEventListener("click", sortResults, false); // search button event
-
     window.onscroll = function() { _stickyHead() };
 
     var header = document.getElementById("filter"); // Get the header
