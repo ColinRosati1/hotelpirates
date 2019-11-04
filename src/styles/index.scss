@@ -1,3 +1,10 @@
+@mixin flex-center($f-direction, $j-content, $a-items) {
+    display: flex;
+    justify-content: $j-content;
+    flex-direction: $f-direction;
+    align-items: $a-items;
+}
+
 $body-bg-color: rgb(169, 230, 194);
 $content-color: #1F2421;
 $content-bg-color: rgb(252, 252, 248);
@@ -11,12 +18,9 @@ body {
 .body-wrapper {
     margin: auto;
     padding: 0;
-    display: flex;
     width: 60vw;
     height: 100%;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    @include flex-center(column, center, center);
 }
 
 .body-head {
@@ -39,8 +43,7 @@ body {
 
 #filter {
     padding: 1em;
-    display: flex;
-    justify-content: center;
+    @include flex-center(row, center, none);
     background: $content-bg-color;
     top: -10px;
     border-bottom: 3px solid black;
@@ -70,11 +73,7 @@ body {
 }
 
 #res-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    ;
+    @include flex-center(row, space-between, center);
 }
 
 #htl-img {

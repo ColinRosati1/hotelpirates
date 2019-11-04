@@ -22,11 +22,8 @@ const initApp = () => {
 
     window.onscroll = function() { _stickyHead() };
 
-    // Get the header
-    var header = document.getElementById("filter");
-
-    // Get the offset position 
-    var sticky = header.offsetTop;
+    var header = document.getElementById("filter"); // Get the header
+    var sticky = header.offsetTop; // Get the offset position 
 
     // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
     function _stickyHead() {
@@ -39,6 +36,7 @@ const initApp = () => {
 }
 
 // TODO toggle comment display
+// target unique reviews id parent and toggle hide class
 const toggleCommentDisplay = (e) => {
     // var elId = "rev" + id;
     // var el = e.parentNode.childNodes
@@ -52,7 +50,10 @@ const toggleCommentDisplay = (e) => {
     // el.classList.toggle("hideRev");
 }
 
-//draw hotel results
+//draw hotel results & hotel reviews
+// wrap unique reviews element in parent class
+// seperate reviews element into comment button always visible and reviews content body to toggle
+// clean up this messy DOM element function!!!
 const drawRes = async(res) => {
     var results = document.getElementById("content-wrapper")
 
@@ -65,7 +66,7 @@ const drawRes = async(res) => {
             '$' + res.price + ' /Night' +
             '<br></br>' +
             'description : ' + res.description +
-            '<div class="reviews" id="' + res.id + '" >' + reviews(res.id).then(val => {
+            '<div class="reviews" id="' + res.id + '" >' + reviews(res.id).then(val => { // This is the nested reviews callback. TODO fix this ugly nested callback
                 document.getElementById(res.id).innerHTML = '<button onclick="toggleCommentDisplay(this)">Comments</button><br></br>';
                 val.map((val) => {
                     return document.getElementById(res.id).innerHTML += "<div id='rev rev-res" + res.id + "'><p>" + val.name + "</p><p>" + val.comment + "</p></div>";
@@ -77,12 +78,6 @@ const drawRes = async(res) => {
             '</div>'
         )
     }).join('') + '</div>'
-
-
-    // console.log("revSection", revSection)
-
-    // document.getElementById("find-flight").addEventListener("click", findFlight, false); // search button event
-
 }
 
 // populate results
@@ -152,7 +147,6 @@ const popHotels = async() => {
         const data = await response.json()
         hotels = data;
         const drawRes = await populateDom(data);
-        // const reviews = await reviews(data.id)
         return data;
     } catch (err) {
         console.log(err.response); // if api error try call it again
@@ -187,8 +181,6 @@ const reviews = async(id) => {
         console.log(err.response); // if api error try call it again
     }
 }
-
-
 
 // open modal
 // return flight detials object
@@ -225,6 +217,8 @@ const handleFlightDetails = () => {
     return flights
 }
 
+
+// find flights back API proposed solution
 const findFlight = async(city) => {
     console.log('find flight', city)
     const cityStr = city.replace(/\s+/g, '-') // clean up spaces from string
@@ -243,10 +237,6 @@ const findFlight = async(city) => {
     // departureDate: "xx.xx.xx",
     // returnDate: "xx.xx.xx"
     // }
-
-
 }
-
-
 
 window.onload = app();

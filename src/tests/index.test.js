@@ -3,6 +3,8 @@
 // Populate hotel restults DOM !
 // Sort button Ascend or Descend !
 // select events
+// TODO write tests for reviews API
+// TODO write test for reviews populate
 
 const fetchMock = require('fetch-mock');
 const { app, initApp, drawRes, populateDom, sortResults, popHotels, sortAsDes } = require('../scripts/utils.js')
