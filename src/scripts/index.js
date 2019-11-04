@@ -48,6 +48,7 @@ const toggleCommentDisplay = (e) => {
     // }
 
     // el.classList.toggle("hideRev");
+    // return
 }
 
 //draw hotel results & hotel reviews
@@ -67,7 +68,7 @@ const drawRes = async(res) => {
             '<br></br>' +
             'description : ' + res.description +
             '<div class="reviews" id="' + res.id + '" >' + reviews(res.id).then(val => { // This is the nested reviews callback. TODO fix this ugly nested callback
-                document.getElementById(res.id).innerHTML = '<button onclick="toggleCommentDisplay(this)">Comments</button><br></br>';
+                document.getElementById(res.id).innerHTML = '<button >Comments</button><br></br>';
                 val.map((val) => {
                     return document.getElementById(res.id).innerHTML += "<div id='rev rev-res" + res.id + "'><p>" + val.name + "</p><p>" + val.comment + "</p></div>";
                 })
