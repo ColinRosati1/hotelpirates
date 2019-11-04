@@ -81,14 +81,14 @@ handled  in the fronted by price, length, layover sorting.
 
 To start, you must only install the dependencies.
 
-```./build/index.html 
-```
+open ./build/index.html 
+
 
 
 ***** for find flight modal you must run the dev code.
 
-```./src/index.html 
-```
+open ./src/index.html 
+
 
 
 
