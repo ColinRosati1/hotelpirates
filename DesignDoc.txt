@@ -91,7 +91,7 @@ Steps to Run
 
 1.open ./build/index.html 
 
-***** for find flight modal you must run the dev code. ./src/index.html
+***** for find flight modal you must run the dev code. ./src/index.html 
 
 
 
