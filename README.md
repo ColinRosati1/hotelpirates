@@ -1,8 +1,14 @@
 # Hotel finder App ☠️
+<<<<<<< HEAD
 ![alt text](https://github.com/ColinRosati1/smart-steel-app/blob/master/smart%20steel%20grab.PNG)
 
 
 # Overview
+=======
+![alt text](https://github.com/ColinRosati1/hotelpirates/blob/Colins-branch/Capture.PNG)
+
+## Overview
+>>>>>>> refs/remotes/testorigin/Colins-branch
 
 Build a small web app that lists hotels from api call and filters based on stars or price.
 Suggest back end flight data structure for.
@@ -21,15 +27,7 @@ We need for our next trip with the whole ☠️-crew a hotel and what we get fro
 
 Present us the hotels that we can choose the right one for our next trip. To make it easier for us to find the right hotel, we want to have a filter for hotel ⭐ (stars) and hotel 💰 (price).
 
-
-To get to our hotel, we also need a flight. But here our backend-🐵 has no idea how he can start with the development.
-
-Your second task is to explain our backend-🐵 what you need from him as a data structure for an API endpoint.
-
-Here you are entirely free how the data structure should look like and which format it should have. Think about what you need to show us also a flight list where we can search flight to our hotel.
-
-Please describe with your own words in a text what you need and give us a short example with dummy data how your data structure will look like. See this text as a briefing for a KickOff meeting that all departments can sit together and talk about the next steps.
-
+To get to our hotel, we also need a flight. 
 
 ## Proposed Solution
 
