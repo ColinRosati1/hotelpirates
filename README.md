@@ -1,6 +1,8 @@
-# Welcome on board ☠️
+# Hotel finder App ☠️
+![alt text](https://github.com/ColinRosati1/smart-steel-app/blob/master/smart%20steel%20grab.PNG)
 
-Overview
+
+# Overview
 
 Build a small web app that lists hotels from api call and filters based on stars or price.
 Suggest back end flight data structure for.
