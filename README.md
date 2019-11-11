@@ -1,11 +1,7 @@
 # Hotel finder App ☠️
-
-# Overview
-=======
 ![alt text](https://github.com/ColinRosati1/hotelpirates/blob/Colins-branch/Capture.PNG)
 
 ## Overview
->>>>>>> refs/remotes/testorigin/Colins-branch
 
 Build a small web app that lists hotels from api call and filters based on stars or price.
 Suggest back end flight data structure for.
